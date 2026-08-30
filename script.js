@@ -91,7 +91,7 @@ if (detectBtn) {
         }
         locationStatus.textContent = message;
         detectBtn.disabled = false;
-        detectBtn.textContent = '📍 Detect';
+        detectBtn.textContent = '📍 Dtect';
       }
     );
   });
