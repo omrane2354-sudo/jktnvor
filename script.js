@@ -54,7 +54,8 @@ if (reportForm) {
       formStatus.className = 'error';
     }
   });
-}// Auto-detect location
+}
+// Auto-detect location
 const detectBtn = document.getElementById('detectLocationBtn');
 const locationInput = document.getElementById('location');
 const locationStatus = document.getElementById('locationStatus');
