@@ -131,4 +131,57 @@ footer {
   background-color: #0d1b2a;
   color: #9ca3af;
   font-size: 14px;
+}/* Report Form */
+#reportForm {
+  max-width: 500px;
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #0d1b2a;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  background-color: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4ade80;
+}
+
+#reportForm .cta-btn {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+#formStatus {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+#formStatus.success {
+  color: #16a34a;
+}
+
+#formStatus.error {
+  color: #dc2626;
 }

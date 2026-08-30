@@ -17,10 +17,10 @@
     </nav>
   </header>
 
-  <section class="hero">
+   <section class="hero">
     <h1>Report It Once. We'll Fix the Rest.</h1>
     <p>Upload a photo + location — our AI identifies civic issues like potholes, garbage, and broken streetlights, then groups duplicate reports automatically.</p>
-    <button class="cta-btn">Report an Issue</button>
+    <a href="#report" class="cta-btn">Report an Issue</a>
   </section>
 
   <section id="how-it-works" class="section">
@@ -50,7 +50,53 @@
       <li>Maps</li>
     </ul>
   </section>
+  <section id="report" class="section alt-bg">
+    <h2>Report an Issue</h2>
+    <p>Fill out the form below — our team will review and prioritize it.</p>
 
+    <form id="reportForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="Street address or landmark" required>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Issue Type</label>
+        <select id="category" name="category" required>
+          <option value="">Select one</option>
+          <option value="Pothole">Pothole</option>
+          <option value="Garbage">Garbage</option>
+          <option value="Broken Streetlight">Broken Streetlight</option>
+          <option value="Water Leak">Water Leak</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4" placeholder="Describe the issue..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="photo">Upload Photo</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+      </div>
+
+      <button type="submit" class="cta-btn">Submit Report</button>
+    </form>
+
+    <p id="formStatus"></p>
+  </section>
   <footer>
     <p>&copy; 2026 CivicFix AI. All rights reserved.</p>
   </footer>
