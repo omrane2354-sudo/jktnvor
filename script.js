@@ -65,13 +65,33 @@ if (detectBtn) {
     if (!navigator.geolocation) {
       locationStatus.textContent = 'Geolocation is not supported by your browser.';
       return;
-    }
+    }// Show a small map with a pin at the given coordinates
+let map;
+let marker;
+
+function showLocationOnMap(lat, lng) {
+  const mapDiv = document.getElementById('locationMap');
+  mapDiv.classList.add('visible');
+
+  if (!map) {
+    map = L.map('locationMap').setView([lat, lng], 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+    marker = L.marker([lat, lng]).addTo(map);
+  } else {
+    map.setView([lat, lng], 15);
+    marker.setLatLng([lat, lng]);
+  }
+
+  setTimeout(() => map.invalidateSize(), 100);
+}
 
     detectBtn.disabled = true;
     detectBtn.textContent = 'Detecting...';
     locationStatus.textContent = 'Fetching your location...';
 
-    navigator.geolocation.getCurrentPosition(
+       navigator.geolocation.getCurrentPosition(
       function (position) {
         const lat = position.coords.latitude.toFixed(6);
         const lng = position.coords.longitude.toFixed(6);
@@ -79,6 +99,7 @@ if (detectBtn) {
         locationStatus.textContent = 'Location detected successfully.';
         detectBtn.disabled = false;
         detectBtn.textContent = '📍 Detect';
+        showLocationOnMap(parseFloat(lat), parseFloat(lng));
       },
       function (error) {
         let message = 'Unable to detect location.';
