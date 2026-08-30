@@ -65,9 +65,13 @@
         <input type="email" id="email" name="email" required>
       </div>
 
-      <div class="form-group">
+          <div class="form-group">
         <label for="location">Location</label>
-        <input type="text" id="location" name="location" placeholder="Street address or landmark" required>
+        <div class="location-row">
+          <input type="text" id="location" name="location" placeholder="Street address or landmark" required>
+          <button type="button" id="detectLocationBtn" class="location-btn">📍 Detect</button>
+        </div>
+        <p id="locationStatus"></p>
       </div>
 
       <div class="form-group">

@@ -184,4 +184,37 @@ footer {
 
 #formStatus.error {
   color: #dc2626;
+}.location-row {
+  display: flex;
+  gap: 10px;
+}
+
+.location-row input {
+  flex: 1;
+}
+
+.location-btn {
+  white-space: nowrap;
+  padding: 10px 16px;
+  background-color: #0d1b2a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.location-btn:hover {
+  background-color: #1b263b;
+}
+
+.location-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#locationStatus {
+  font-size: 13px;
+  margin-top: 6px;
+  color: #6b7280;
 }
