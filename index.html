@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivicFix AI</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,7 +78,15 @@
           <input type="text" id="location" name="location" placeholder="Street address or landmark" required>
           <button type="button" id="detectLocationBtn" class="location-btn">📍 Detect</button>
         </div>
+        <p id="locationStatus"></p>      <div class="form-group">
+        <label for="location">Location</label>
+        <div class="location-row">
+          <input type="text" id="location" name="location" placeholder="Street address or landmark" required>
+          <button type="button" id="detectLocationBtn" class="location-btn">📍 Detect</button>
+        </div>
         <p id="locationStatus"></p>
+        <div id="locationMap"></div>
+      </div>
       </div>
 
       <div class="form-group">
@@ -102,6 +117,9 @@
     <p>&copy; 2026 CivicFix AI. All rights reserved.</p>
   </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
+</body>
+<script src="script.js"></script>
 </body>
 </html>

@@ -136,47 +136,7 @@ footer {
   max-width: 500px;
   margin-top: 30px;
 }
-// Auto-detect location
-const detectBtn = document.getElementById('detectLocationBtn');
-const locationInput = document.getElementById('location');
-const locationStatus = document.getElementById('locationStatus');
 
-if (detectBtn) {
-  detectBtn.addEventListener('click', function () {
-    if (!navigator.geolocation) {
-      locationStatus.textContent = 'Geolocation is not supported by your browser.';
-      return;
-    }
-
-    detectBtn.disabled = true;
-    detectBtn.textContent = 'Detecting...';
-    locationStatus.textContent = 'Fetching your location...';
-
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        const lat = position.coords.latitude.toFixed(6);
-        const lng = position.coords.longitude.toFixed(6);
-        locationInput.value = `${lat}, ${lng}`;
-        locationStatus.textContent = 'Location detected successfully.';
-        detectBtn.disabled = false;
-        detectBtn.textContent = '📍 Detect';
-      },
-      function (error) {
-        let message = 'Unable to detect location.';
-        if (error.code === error.PERMISSION_DENIED) {
-          message = 'Location permission denied. Please allow access or type it manually.';
-        } else if (error.code === error.POSITION_UNAVAILABLE) {
-          message = 'Location unavailable. Please type it manually.';
-        } else if (error.code === error.TIMEOUT) {
-          message = 'Location request timed out. Try again.';
-        }
-        locationStatus.textContent = message;
-        detectBtn.disabled = false;
-        detectBtn.textContent = '📍 Detect';
-      }
-    );
-  });
-}
 .form-group {
   margin-bottom: 20px;
 }
