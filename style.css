@@ -243,18 +243,3 @@ footer {
   display: block;
 }
 
-#aiStatus {
-  font-size: 13px;
-  margin-top: 8px;
-  color: #6b7280;
-}
-
-#aiStatus.detecting {
-  color: #0d1b2a;
-  font-weight: bold;
-}
-
-#aiStatus.done {
-  color: #16a34a;
-  font-weight: bold;
-}
