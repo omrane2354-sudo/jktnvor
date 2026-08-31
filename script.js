@@ -117,6 +117,7 @@ function showLocationOnMap(lat, lng) {
     );
   });
 }// AI photo classification
+// AI photo classification
 let mobilenetModel = null;
 
 async function loadModel() {
@@ -126,7 +127,6 @@ async function loadModel() {
   return mobilenetModel;
 }
 
-// Map MobileNet's generic labels to your issue categories
 function mapLabelToCategory(label) {
   const text = label.toLowerCase();
 
@@ -148,8 +148,7 @@ function mapLabelToCategory(label) {
 const photoInput = document.getElementById('photo');
 const aiPreviewWrap = document.getElementById('aiPreviewWrap');
 const aiPreviewImg = document.getElementById('aiPreviewImg');
-const aiStatus = document.getElementById('aiStatus');
-const categorySelect = document.getElementById('category');
+const categoryField = document.getElementById('category');
 
 if (photoInput) {
   photoInput.addEventListener('change', async function () {
@@ -160,33 +159,18 @@ if (photoInput) {
     aiPreviewImg.src = imageUrl;
     aiPreviewWrap.classList.add('visible');
 
-    aiStatus.textContent = 'Loading AI model...';
-    aiStatus.className = 'detecting';
-
     try {
       const model = await loadModel();
-
-      aiStatus.textContent = 'Analyzing photo...';
 
       aiPreviewImg.onload = async function () {
         const predictions = await model.classify(aiPreviewImg);
         if (predictions && predictions.length > 0) {
           const topGuess = predictions[0].className;
-          const confidence = Math.round(predictions[0].probability * 100);
-          const suggestedCategory = mapLabelToCategory(topGuess);
-
-          categorySelect.value = suggestedCategory;
-          aiStatus.textContent = `AI suggests: ${suggestedCategory} (detected "${topGuess}", ${confidence}% confidence). Feel free to change it.`;
-          aiStatus.className = 'done';
-        } else {
-          aiStatus.textContent = 'Could not analyze the photo. Please select manually.';
-          aiStatus.className = '';
+          categoryField.value = mapLabelToCategory(topGuess);
         }
       };
     } catch (error) {
-      aiStatus.textContent = 'AI analysis failed. Please select manually.';
-      aiStatus.className = '';
-      console.error(error);
+      console.error('AI classification failed:', error);
     }
   });
 }

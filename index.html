@@ -88,25 +88,15 @@
         <div id="locationMap"></div>
       </div>
       </div>
-      <div class="form-group">
-        <label for="photo">Upload Photo (AI will suggest the issue type)</label>
-        <input type="file" id="photo" accept="image/*">
+           <div class="form-group">
+        <label for="photo">Upload Photo</label>
+        <input type="file" id="photo" accept="image/*" required>
         <div id="aiPreviewWrap">
           <img id="aiPreviewImg" alt="Preview">
         </div>
-        <p id="aiStatus"></p>
       </div>
-      <div class="form-group">
-        <label for="category">Issue Type</label>
-        <select id="category" name="category" required>
-          <option value="">Select one</option>
-          <option value="Pothole">Pothole</option>
-          <option value="Garbage">Garbage</option>
-          <option value="Broken Streetlight">Broken Streetlight</option>
-          <option value="Water Leak">Water Leak</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
+
+      <input type="hidden" id="category" name="category" value=""> 
 
       <div class="form-group">
         <label for="description">Description</label>
