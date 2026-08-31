@@ -158,15 +158,13 @@ if (photoInput) {
     const file = photoInput.files[0];
     if (!file) return;
 
-    const imageUrl = URL.createObjectURL(file);
-    aiPreviewImg.src = imageUrl;
+       const imageUrl = URL.createObjectURL(file);
     aiPreviewWrap.classList.add('visible');
 
-    try {
-      const model = await loadModel();
-
-      aiPreviewImg.onload = async function () {
+    async function runClassification() {
+      try {
         console.log('Image loaded, running classification...');
+        const model = await loadModel();
         const predictions = await model.classify(aiPreviewImg);
         console.log('AI raw guess:', predictions);
         if (predictions && predictions.length > 0) {
@@ -174,9 +172,17 @@ if (photoInput) {
           categoryField.value = mapLabelToCategory(topGuess);
           console.log('Mapped category:', categoryField.value);
         }
-      };
-    } catch (error) {
-      console.error('AI classification failed:', error);
+      } catch (error) {
+        console.error('AI classification failed:', error);
+      }
+    }
+
+    aiPreviewImg.onload = runClassification;
+    aiPreviewImg.src = imageUrl;
+
+    // Fallback: if the image is already loaded/cached, onload may not fire
+    if (aiPreviewImg.complete && aiPreviewImg.naturalWidth > 0) {
+      runClassification();
     }
   });
 } else {
