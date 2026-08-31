@@ -153,12 +153,12 @@ const aiPreviewImg = document.getElementById('aiPreviewImg');
 const categoryField = document.getElementById('category');
 
 if (photoInput) {
-  photoInput.addEventListener('change', async function () {
+  photoInput.addEventListener('change', function () {
     console.log('Photo input changed - file selected');
     const file = photoInput.files[0];
     if (!file) return;
 
-       const imageUrl = URL.createObjectURL(file);
+    const imageUrl = URL.createObjectURL(file);
     aiPreviewWrap.classList.add('visible');
 
     async function runClassification() {
@@ -180,7 +180,6 @@ if (photoInput) {
     aiPreviewImg.onload = runClassification;
     aiPreviewImg.src = imageUrl;
 
-    // Fallback: if the image is already loaded/cached, onload may not fire
     if (aiPreviewImg.complete && aiPreviewImg.naturalWidth > 0) {
       runClassification();
     }
