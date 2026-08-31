@@ -227,4 +227,34 @@ footer {
 
 #locationMap.visible {
   display: block;
+}#aiPreviewWrap {
+  margin-top: 10px;
+  display: none;
+}
+
+#aiPreviewWrap.visible {
+  display: block;
+}
+
+#aiPreviewImg {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  display: block;
+}
+
+#aiStatus {
+  font-size: 13px;
+  margin-top: 8px;
+  color: #6b7280;
+}
+
+#aiStatus.detecting {
+  color: #0d1b2a;
+  font-weight: bold;
+}
+
+#aiStatus.done {
+  color: #16a34a;
+  font-weight: bold;
 }

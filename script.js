@@ -116,4 +116,77 @@ function showLocationOnMap(lat, lng) {
       }
     );
   });
+}// AI photo classification
+let mobilenetModel = null;
+
+async function loadModel() {
+  if (!mobilenetModel) {
+    mobilenetModel = await mobilenet.load();
+  }
+  return mobilenetModel;
+}
+
+// Map MobileNet's generic labels to your issue categories
+function mapLabelToCategory(label) {
+  const text = label.toLowerCase();
+
+  if (text.includes('manhole') || text.includes('pothole') || text.includes('crack')) {
+    return 'Pothole';
+  }
+  if (text.includes('trash') || text.includes('garbage') || text.includes('ashcan') || text.includes('waste')) {
+    return 'Garbage';
+  }
+  if (text.includes('streetlight') || text.includes('lamp') || text.includes('light')) {
+    return 'Broken Streetlight';
+  }
+  if (text.includes('water') || text.includes('fountain') || text.includes('hydrant')) {
+    return 'Water Leak';
+  }
+  return 'Other';
+}
+
+const photoInput = document.getElementById('photo');
+const aiPreviewWrap = document.getElementById('aiPreviewWrap');
+const aiPreviewImg = document.getElementById('aiPreviewImg');
+const aiStatus = document.getElementById('aiStatus');
+const categorySelect = document.getElementById('category');
+
+if (photoInput) {
+  photoInput.addEventListener('change', async function () {
+    const file = photoInput.files[0];
+    if (!file) return;
+
+    const imageUrl = URL.createObjectURL(file);
+    aiPreviewImg.src = imageUrl;
+    aiPreviewWrap.classList.add('visible');
+
+    aiStatus.textContent = 'Loading AI model...';
+    aiStatus.className = 'detecting';
+
+    try {
+      const model = await loadModel();
+
+      aiStatus.textContent = 'Analyzing photo...';
+
+      aiPreviewImg.onload = async function () {
+        const predictions = await model.classify(aiPreviewImg);
+        if (predictions && predictions.length > 0) {
+          const topGuess = predictions[0].className;
+          const confidence = Math.round(predictions[0].probability * 100);
+          const suggestedCategory = mapLabelToCategory(topGuess);
+
+          categorySelect.value = suggestedCategory;
+          aiStatus.textContent = `AI suggests: ${suggestedCategory} (detected "${topGuess}", ${confidence}% confidence). Feel free to change it.`;
+          aiStatus.className = 'done';
+        } else {
+          aiStatus.textContent = 'Could not analyze the photo. Please select manually.';
+          aiStatus.className = '';
+        }
+      };
+    } catch (error) {
+      aiStatus.textContent = 'AI analysis failed. Please select manually.';
+      aiStatus.className = '';
+      console.error(error);
+    }
+  });
 }

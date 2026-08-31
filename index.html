@@ -88,7 +88,14 @@
         <div id="locationMap"></div>
       </div>
       </div>
-
+      <div class="form-group">
+        <label for="photo">Upload Photo (AI will suggest the issue type)</label>
+        <input type="file" id="photo" accept="image/*">
+        <div id="aiPreviewWrap">
+          <img id="aiPreviewImg" alt="Preview">
+        </div>
+        <p id="aiStatus"></p>
+      </div>
       <div class="form-group">
         <label for="category">Issue Type</label>
         <select id="category" name="category" required>
@@ -121,5 +128,8 @@
   <script src="script.js"></script>
 </body>
 <script src="script.js"></script>
-</body>
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"></script>
+  <script src="script.js"></script></body>
 </html>
